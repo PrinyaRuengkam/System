@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>ข้อมูลสินค้า</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>ข้อมูลสินค้า</h2>
+
+        <!-- ปุ่มแอดมินและเพิ่มสินค้า -->
+        <a href="{% url 'admin:index' %}" class="btn btn-primary float-right mb-3">แอดมิน</a>
+        <a href="{% url 'item_create' %}" class="btn btn-success mb-3">เพิ่มสินค้า</a>
+
+        <!-- ตารางแสดงข้อมูลสินค้า -->
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ชื่อสินค้า</th>
+                    <th>คำอธิบาย</th>
+                    <th>ราคา</th>
+                    <th>จำนวน</th>
+                    <th>การดำเนินการ</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if items %}
+                    {% for item in items %}
+                        <tr>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.description }}</td>
+                            <td>{{ item.price }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>
+                                <a href="{% url 'item_update' item.pk %}" class="btn btn-warning btn-sm">แก้ไข</a>
+                                <a href="{% url 'item_delete' item.pk %}" class="btn btn-danger btn-sm">ลบ</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center">ไม่พบสินค้า</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>    
+</body>
+</html>
