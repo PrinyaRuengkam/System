@@ -1,0 +1,53 @@
+<!-- myapp/templates/myapp/item_list.html -->
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>รายการสินค้า</title>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">รายการสินค้า</h1>
+    <a href="{% url 'item_create' %}" class="btn btn-primary mb-3">เพิ่มสินค้า</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID สินค้า</th>
+                <th>ชื่อสินค้า</th>
+                <th>คำอธิบาย</th>
+                <th>ราคา</th>
+                <th>จำนวน</th>
+                <th>วันที่เพิ่ม</th>
+                <th>วันที่อัปเดต</th>
+                <th>ดำเนินการ</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.created_at_th }}</td>
+                <td>{{ item.updated_at_th }}</td>
+                <td>
+                    <a href="{% url 'item_update' item.pk %}" class="btn btn-warning btn-sm">แก้ไข</a>
+                    <form method="post" action="{% url 'item_delete' item.pk %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">ลบ</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

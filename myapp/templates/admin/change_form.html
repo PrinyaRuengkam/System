@@ -1,9 +1,0 @@
-{% extends "admin/change_form.html" %}
-
-{% block submit_buttons_bottom %}
-    <!-- ปุ่ม Back ไปยังหน้าแรกของ Admin -->
-    <a href="{% url 'admin:index' %}" class="button" style="margin-right: 10px; background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
-        Back
-    </a>
-    {{ block.super }}  <!-- ส่วนนี้สำหรับปุ่ม Save ของแอดมินปกติ -->
-{% endblock %}
